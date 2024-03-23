@@ -1,4 +1,4 @@
-package rucafe.ordermanager.cs213project4;
+package rucafe.ordermanager;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

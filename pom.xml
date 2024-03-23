@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                rucafe.ordermanager.cs213project4/rucafe.ordermanager.cs213project4.HelloApplication
+                                rucafe.ordermanager.cs213project4/rucafe.ordermanager.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
