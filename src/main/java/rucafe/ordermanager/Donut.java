@@ -1,5 +1,7 @@
 package rucafe.ordermanager;
 
+import java.util.Objects;
+
 public class Donut extends MenuItem {
     private final DonutType type;
     private final String flavor;
@@ -29,5 +31,14 @@ public class Donut extends MenuItem {
     @Override
     public double price() {
         return type.getPrice() * quantity;
+    }
+
+    public boolean equals(String string) {
+        String[] tokens = string.split("\\(");
+        String flavor = tokens[0];
+        String quantityStr = tokens[1].replaceAll("[^0-9]", "");
+        int quantity = Integer.parseInt(quantityStr);
+
+        return this.flavor.equals(flavor) && this.quantity == quantity;
     }
 }
