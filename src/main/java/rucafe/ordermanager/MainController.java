@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class MainController {
+
+    // Gotta change the buttons to image buttons
+
     @FXML
     protected void onOrderDonutsButtonClick() {
         try {
