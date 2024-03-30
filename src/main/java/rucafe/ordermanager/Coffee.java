@@ -1,8 +1,8 @@
 package rucafe.ordermanager;
 
 public class Coffee extends MenuItem {
-    private CoffeeSize coffeeSize;
-    private Boolean[] add_ins;
+    private final CoffeeSize coffeeSize;
+    private final Boolean[] add_ins;
     // [sweet cream, French vanilla, Irish cream, caramel, mocha]
     private static final double ADD_IN_PRICE = 0.30;
 
@@ -15,7 +15,7 @@ public class Coffee extends MenuItem {
         return coffeeSize;
     }
 
-    public Boolean[] getAddins() {
+    public Boolean[] getAdd_ins() {
         return add_ins;
     }
 

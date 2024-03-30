@@ -1,9 +1,9 @@
 package rucafe.ordermanager;
 
 public class Sandwich extends MenuItem{
-    private String bread;
-    private SandwichProtein protein;
-    private boolean[] add_ons;
+    private final String bread;
+    private final SandwichProtein protein;
+    private final boolean[] add_ons;
     // [cheese, lettuce, tomatoes, onions]
     private static final double CHEESE_ADD_ON_PRICE = 1.00;
     private static final double VEGI_ADD_ON_PRICE = 0.30;
