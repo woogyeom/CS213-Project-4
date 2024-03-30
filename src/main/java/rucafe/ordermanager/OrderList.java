@@ -2,6 +2,9 @@ package rucafe.ordermanager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class OrderList {
 
@@ -36,4 +39,16 @@ public class OrderList {
         }
         return "Order Number Does Not Exist";
     }
+
+    public void saveOrdersToFile() {
+        try (PrintWriter pw = new PrintWriter(new File("orders.txt"))) {
+            for (Order order : orders) {
+                pw.println(order.toString());
+                pw.println("-----");
+            }
+        } catch (FileNotFoundException e) {
+            System.err.println("Failed to save orders to the file: " + e.getMessage());
+        }
+    }
+
 }
