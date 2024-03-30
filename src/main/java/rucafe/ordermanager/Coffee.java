@@ -29,4 +29,20 @@ public class Coffee extends MenuItem {
         }
         return coffeeSize.getPrice() + (count * ADD_IN_PRICE);
     }
+
+    @Override
+    public String toString() {
+        String returnString = "(COFFEE) [Item Number: " + this.getItemNumber() + "]  size: " + coffeeSize + "Add-ins:";
+        String add = "";
+        if (add_ins[0]) add += " Sweet Cream,";
+        if (add_ins[1]) add += " French Vanilla,";
+        if (add_ins[2]) add += " Irish Cream,";
+        if (add_ins[3]) add += " Caramel,";
+        if (add_ins[4]) add += " mocha,";
+        if (add.isEmpty()) add = " None,";
+
+        returnString += add;
+        returnString += " PRICE: $" + String.format("%.2f", this.price());
+        return returnString;
+    }
 }

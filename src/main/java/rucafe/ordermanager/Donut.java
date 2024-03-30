@@ -26,9 +26,7 @@ public class Donut extends MenuItem {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 
     @Override
     public double price() {
@@ -45,5 +43,10 @@ public class Donut extends MenuItem {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "(DONUT) [Item Number: " + this.getItemNumber() + "] Type: " + this.getType().getDisplayName() + " Flavor: " + this.flavor + " Quantity: " + quantity + ", PRICE: $" + String.format("%.2f", this.price());
     }
 }
