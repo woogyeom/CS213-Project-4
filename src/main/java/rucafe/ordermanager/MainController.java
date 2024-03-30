@@ -17,6 +17,7 @@ public class MainController {
             FXMLLoader fxmlLoader = new FXMLLoader(RUCafe.class.getResource("order-donuts.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = new Stage();
+            stage.setTitle("Order Donuts");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {

@@ -85,7 +85,7 @@ public class OrderDonutsController {
     }
 
     @FXML
-    private void onAddToOrderButtonClick(ActionEvent actionEvent) {
+    private void onAddToOrderButtonClick() {
         if (selectedDonuts.isEmpty()) return;
 
     }
