@@ -13,6 +13,19 @@ public class Sandwich extends MenuItem{
         this.protein = protein;
         this.add_ons = add_ons;
     }
+
+    public String getBread() {
+        return bread;
+    }
+
+    public SandwichProtein getProtein() {
+        return protein;
+    }
+
+    public boolean[] getAdd_ons() {
+        return add_ons;
+    }
+
     @Override
     public double price() {
         int cheese_count = 0;
