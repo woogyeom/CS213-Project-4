@@ -8,7 +8,7 @@ public class Order {
     private int orderNumber;
     private int nextItemNumber = 1;
 
-    public Order(int orderNumber) {
+    public Order() {
         this.items = new ArrayList<MenuItem>();
     }
 
@@ -24,6 +24,20 @@ public class Order {
                 return;
             }
         }
+    }
+
+    public void removeItem(MenuItem menuItem) {
+        MenuItem itemToRemove = null;
+        for (MenuItem item : items) {
+            if (item.equals(menuItem)) {
+                itemToRemove = item;
+            }
+        }
+        if (itemToRemove != null) items.remove(itemToRemove);
+    }
+
+    public List<MenuItem> getItems() {
+        return items;
     }
 
     public double getSubTotal() {
@@ -48,6 +62,24 @@ public class Order {
 
     public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public boolean contains(MenuItem menuItem) {
+        for (MenuItem item : items) {
+            if (item.equals(menuItem)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public MenuItem find(MenuItem menuItem) {
+        for (MenuItem item : items) {
+            if (item.equals(menuItem)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     @Override

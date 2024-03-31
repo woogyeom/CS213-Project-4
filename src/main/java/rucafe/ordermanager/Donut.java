@@ -1,9 +1,5 @@
 package rucafe.ordermanager;
 
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Donut extends MenuItem {
     private final DonutType type;
     private final String flavor;
@@ -33,13 +29,10 @@ public class Donut extends MenuItem {
         return type.getPrice() * quantity;
     }
 
-    public boolean equals(String string) {
-        Pattern pattern = Pattern.compile("^(.+)\\((\\d+)\\)$");
-        Matcher matcher = pattern.matcher(string);
-        if (matcher.find()) {
-            String flavor = matcher.group(1);
-            int quantity = Integer.parseInt(matcher.group(2));
-            return this.flavor.equals(flavor) && this.quantity == quantity;
+    @Override
+    public boolean equals(MenuItem menuItem) {
+        if (menuItem instanceof Donut donut) {
+            return flavor.equals(donut.getFlavor());
         } else {
             return false;
         }
@@ -47,6 +40,6 @@ public class Donut extends MenuItem {
 
     @Override
     public String toString() {
-        return "(DONUT) [Item Number: " + this.getItemNumber() + "] Type: " + this.getType().getDisplayName() + " Flavor: " + this.flavor + " Quantity: " + quantity + ", PRICE: $" + String.format("%.2f", this.price());
+        return "(DONUT) [Item Number: " + getItemNumber() + "] Type: " + type.getDisplayName() + " Flavor: " + flavor + " Quantity: " + quantity + ", PRICE: $" + String.format("%.2f", price());
     }
 }

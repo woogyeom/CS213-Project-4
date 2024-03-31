@@ -1,22 +1,36 @@
 package rucafe.ordermanager;
 
+import java.util.Arrays;
+
 public class Coffee extends MenuItem {
-    private final CoffeeSize coffeeSize;
-    private final Boolean[] add_ins;
+    private CoffeeSize coffeeSize;
+    private boolean[] add_ins;
     // [sweet cream, French vanilla, Irish cream, caramel, mocha]
+    private int quantity;
     private static final double ADD_IN_PRICE = 0.30;
 
-    public Coffee(CoffeeSize coffeeSize, Boolean[] add_ins) {
+    public Coffee(CoffeeSize coffeeSize, boolean[] add_ins, int quantity) {
         this.coffeeSize = coffeeSize;
         this.add_ins = add_ins;
+        this.quantity = quantity;
     }
 
     public CoffeeSize getCoffeeSize() {
         return coffeeSize;
     }
-
-    public Boolean[] getAdd_ins() {
+    public void setCoffeeSize(CoffeeSize coffeeSize) { this.coffeeSize = coffeeSize; }
+    public boolean[] getAdd_ins() {
         return add_ins;
+    }
+    public void setAdd_ins(boolean[] add_ins) {
+        this.add_ins = add_ins;
+    }
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override
@@ -27,12 +41,21 @@ public class Coffee extends MenuItem {
                 count++;
             }
         }
-        return coffeeSize.getPrice() + (count * ADD_IN_PRICE);
+        return (coffeeSize.getPrice() + (count * ADD_IN_PRICE)) * quantity;
+    }
+
+    @Override
+    public boolean equals(MenuItem menuItem) {
+        if (menuItem instanceof Coffee coffee) {
+            return this.coffeeSize.equals(coffee.coffeeSize) && Arrays.equals(this.add_ins, coffee.add_ins);
+        } else {
+            return false;
+        }
     }
 
     @Override
     public String toString() {
-        String returnString = "(COFFEE) [Item Number: " + this.getItemNumber() + "]  size: " + coffeeSize + "Add-ins:";
+        String returnString = "(COFFEE) [Item Number: " + this.getItemNumber() + "]  size: " + coffeeSize + " Add-ins:";
         String add = "";
         if (add_ins[0]) add += " Sweet Cream,";
         if (add_ins[1]) add += " French Vanilla,";
@@ -42,7 +65,7 @@ public class Coffee extends MenuItem {
         if (add.isEmpty()) add = " None,";
 
         returnString += add;
-        returnString += " PRICE: $" + String.format("%.2f", this.price());
+        returnString += " Quantity: " + quantity + " PRICE: $" + String.format("%.2f", this.price());
         return returnString;
     }
 }

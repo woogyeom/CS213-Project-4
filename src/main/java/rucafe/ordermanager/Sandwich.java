@@ -1,29 +1,48 @@
 package rucafe.ordermanager;
 
+import java.util.Arrays;
+
 public class Sandwich extends MenuItem{
-    private final String bread;
-    private final SandwichProtein protein;
-    private final boolean[] add_ons;
-    // [cheese, lettuce, tomatoes, onions]
+    private String bread;
+    private SandwichProtein protein;
+    private boolean[] add_ons;
+    // [cheese, lettuce, tomato, onion]
+    private int quantity;
     private static final double CHEESE_ADD_ON_PRICE = 1.00;
     private static final double VEGI_ADD_ON_PRICE = 0.30;
 
-    public Sandwich(String bread, SandwichProtein protein, boolean[] add_ons) {
+    public Sandwich(String bread, SandwichProtein protein, boolean[] add_ons, int quantity) {
         this.bread = bread;
         this.protein = protein;
         this.add_ons = add_ons;
+        this.quantity = quantity;
     }
 
     public String getBread() {
         return bread;
     }
-
+    public void setBread(String bread) {
+        this.bread = bread;
+    }
     public SandwichProtein getProtein() {
         return protein;
     }
-
+    public void setProtein(SandwichProtein protein) {
+        this.protein = protein;
+    }
     public boolean[] getAdd_ons() {
         return add_ons;
+    }
+    public void setAdd_ons(boolean[] add_ons) {
+        this.add_ons = add_ons;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override
@@ -39,7 +58,16 @@ public class Sandwich extends MenuItem{
                 }
             }
         }
-        return protein.getPrice() + (cheese_count * CHEESE_ADD_ON_PRICE) + (vegi_count * VEGI_ADD_ON_PRICE);
+        return (protein.getPrice() + (cheese_count * CHEESE_ADD_ON_PRICE) + (vegi_count * VEGI_ADD_ON_PRICE)) * quantity;
+    }
+
+    @Override
+    public boolean equals(MenuItem menuItem) {
+        if (menuItem instanceof Sandwich sandwich) {
+            return bread.equals(sandwich.getBread()) && protein.equals(sandwich.getProtein()) && Arrays.equals(add_ons, sandwich.getAdd_ons());
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -53,7 +81,7 @@ public class Sandwich extends MenuItem{
         if (add.isEmpty()) add = " None,";
         returnString += add;
 
-        returnString += " PRICE: $" + String.format("%.2f", this.price());
+        returnString += " Quantity: " + quantity + " PRICE: $" + String.format("%.2f", this.price());
 
         return returnString;
     }

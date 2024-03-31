@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="389.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rucafe.ordermanager.OrderCoffeeController">
+    <children>
+        <ComboBox fx:id="coffeeQuantityComboBox" layoutX="292.0" layoutY="241.0" onAction="#handleCoffeeQuantity" prefHeight="22.0" prefWidth="78.0" visibleRowCount="5" />
+        <ComboBox fx:id="coffeeSizeComboBox" layoutX="241.0" layoutY="209.0" onAction="#handleCoffeeSize" prefHeight="22.0" prefWidth="129.0" />
+        <TextField fx:id="subTotalTextField" editable="false" layoutX="158.0" layoutY="263.0" prefHeight="22.0" prefWidth="83.0" />
+        <Button fx:id="addToOrderButton" layoutX="290.0" layoutY="274.0" mnemonicParsing="false" onAction="#onAddToOrderButtonClick" text="Add to order" />
+        <Label layoutX="93.0" layoutY="267.0" text="sub-total" />
+      <CheckBox fx:id="sweetCreamCheckBox" layoutX="72.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleAddIns" text="Sweet Cream" />
+      <CheckBox fx:id="frenchVanillaCheckBox" layoutX="72.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleAddIns" text="French Vanilla" />
+      <CheckBox fx:id="irishCreamCheckBox" layoutX="72.0" layoutY="212.0" mnemonicParsing="false" onAction="#handleAddIns" text="Irish Cream" />
+      <CheckBox fx:id="mochaCheckBox" layoutX="199.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleAddIns" text="Mocha" />
+      <CheckBox fx:id="caramelCheckBox" layoutX="197.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleAddIns" text="Caramel" />
+    </children>
+</AnchorPane>

@@ -1,19 +1,20 @@
 package rucafe.ordermanager;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class OrderDonutsController {
+    public Button addToOrderButton;
     @FXML
     private ComboBox<String> donutTypeComboBox;
 
     @FXML
-    private ComboBox<String> donutQuantityComboBox;
+    private ComboBox<Integer> donutQuantityComboBox;
 
     @FXML
     private ListView<String> availableFlavorsListView;
@@ -24,6 +25,7 @@ public class OrderDonutsController {
     @FXML
     private TextField subTotalTextField;
 
+    private final OrderList orderList = OrderList.getInstance();
     private List<Donut> selectedDonuts;
 
     @FXML
@@ -36,11 +38,12 @@ public class OrderDonutsController {
         donutTypeComboBox.setValue(DonutType.YEAST.getDisplayName());
 
         for (int i = 1; i <= 12; i++) {
-            donutQuantityComboBox.getItems().add(String.valueOf(i));
+            donutQuantityComboBox.getItems().add(i);
         }
-        donutQuantityComboBox.setValue("1");
+        donutQuantityComboBox.setValue(1);
 
         updateAvailableFlavors();
+        updateSubTotal();
     }
 
     private DonutType getDonutType() {
@@ -48,7 +51,7 @@ public class OrderDonutsController {
     }
 
     private int getDonutQuantity() {
-        return Integer.parseInt(donutQuantityComboBox.getValue());
+        return donutQuantityComboBox.getValue();
     }
 
     @FXML
@@ -72,7 +75,7 @@ public class OrderDonutsController {
         if (selectedFlavorsListView.getSelectionModel().getSelectedItem() == null) return;
         Donut donutToRemove = null;
         for (Donut donut : selectedDonuts) {
-            if (donut.equals(selectedFlavorsListView.getSelectionModel().getSelectedItem())) {
+            if (donut.equals(Utils.stringToDonut(selectedFlavorsListView.getSelectionModel().getSelectedItem()))) {
                 donutToRemove = donut;
             }
         }
@@ -86,19 +89,32 @@ public class OrderDonutsController {
 
     @FXML
     private void onAddToOrderButtonClick() {
+        Order curOrder = orderList.getCurOrder();
         if (selectedDonuts.isEmpty()) return;
+        for (Donut selectedDonut : selectedDonuts) {
+            if (curOrder.find(selectedDonut) == null) {
+                curOrder.addItem(selectedDonut);
+            } else {
+                curOrder.find(selectedDonut).setQuantity(curOrder.find(selectedDonut).getQuantity() + selectedDonut.getQuantity());
+            }
+        }
+        selectedDonuts.clear();
+        updateAvailableFlavors();
+        updateSelectedFlavors();
+        updateSubTotal();
 
+        Stage stage = (Stage) addToOrderButton.getScene().getWindow();
+        stage.close();
     }
 
-    @FXML
     private void updateAvailableFlavors() {
         String[] availableFlavors = getDonutType().getFlavors();
         availableFlavorsListView.getItems().clear();
 
         for (String availableFlavor : availableFlavors) {
             boolean flavorAlreadySelected = false;
-            for (int i = 0; i < selectedDonuts.size(); i++) {
-                if (availableFlavor.equals(selectedDonuts.get(i).getFlavor())) {
+            for (Donut selectedDonut : selectedDonuts) {
+                if (availableFlavor.equals(selectedDonut.getFlavor())) {
                     flavorAlreadySelected = true;
                     break;
                 }
@@ -109,7 +125,6 @@ public class OrderDonutsController {
         }
     }
 
-    @FXML
     private void updateSelectedFlavors() {
         selectedFlavorsListView.getItems().clear();
         for (Donut donut : selectedDonuts) {
@@ -117,14 +132,12 @@ public class OrderDonutsController {
         }
     }
 
-    @FXML
     private void updateSubTotal() {
         double subTotal = 0;
         for (Donut donut : selectedDonuts) {
-            subTotal += donut.getType().getPrice() * donut.getQuantity();
+            subTotal += donut.price();
         }
         String formattedSubTotal = String.format("%.2f", subTotal);
-
         subTotalTextField.setText(formattedSubTotal);
     }
 }
