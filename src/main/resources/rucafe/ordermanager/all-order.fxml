@@ -3,11 +3,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rucafe.ordermanager.AllOrderController">
    <children>
       <ListView fx:id="ordersList" layoutX="27.0" layoutY="51.0" prefHeight="268.0" prefWidth="545.0" />
-      <Button fx:id="removeOrderButton" layoutX="229.0" layoutY="342.0" mnemonicParsing="false" onAction="#onRemoveOrderClicked" text="Remove Selected Order" />
+      <Button fx:id="removeOrderButton" layoutX="90.0" layoutY="343.0" mnemonicParsing="false" onAction="#onRemoveOrderClicked" text="Remove Selected Order" />
+      <Button fx:id="exportOrdersButton" layoutX="352.0" layoutY="343.0" mnemonicParsing="false" onAction="#onExportOrdersClicked" text="Export List to File" />
+      <Text layoutX="273.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All Orders" />
    </children>
 </AnchorPane>

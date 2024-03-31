@@ -19,7 +19,8 @@ public class AllOrderController {
     @FXML
     private Button removeOrderButton;
 
-
+    @FXML
+    private Button exportOrdersButton;
 
     private final OrderList orderList = OrderList.getInstance();
     private Order curOrder;
@@ -54,6 +55,13 @@ public class AllOrderController {
             return -1;
         }
     }
+
+    @FXML
+    void onExportOrdersClicked(ActionEvent event) {
+        OrderList.getInstance().saveOrdersToFile();
+        //System.out.println("Orders have been successfully exported to orders.txt");
+    }
+
 
 
 }
