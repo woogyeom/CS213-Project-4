@@ -64,4 +64,9 @@ public class OrderList {
         }
     }
 
+    public List<Order> getAllOrders() {
+        return new ArrayList<>(orders); // Returns a copy of the orders list
+    }
+
+
 }

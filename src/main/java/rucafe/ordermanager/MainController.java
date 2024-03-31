@@ -72,6 +72,15 @@ public class MainController {
 
     @FXML
     protected void onOrderAllOrdersButtonClick() {
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(RUCafe.class.getResource("all-order.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("All Orders");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
