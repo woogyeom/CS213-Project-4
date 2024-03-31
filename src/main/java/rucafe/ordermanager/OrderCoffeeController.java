@@ -81,7 +81,6 @@ public class OrderCoffeeController {
     @FXML
     private void onAddToOrderButtonClick() {
         Order curOrder = orderList.getCurOrder();
-        System.out.println(coffee);
         if (curOrder.find(coffee) == null) {
             curOrder.addItem(coffee);
         } else {
