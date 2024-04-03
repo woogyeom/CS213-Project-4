@@ -28,7 +28,9 @@ public class CurrentOrderController {
 
     @FXML
     private void onPlaceOrderButtonClick() {
+        if (curOrder.getItems().isEmpty()) return;
         orderList.submitOrder(curOrder);
+        curOrder = orderList.getCurOrder();
         updateItemListView();
         updatePrice();
     }

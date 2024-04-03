@@ -28,11 +28,10 @@ public class OrderList {
         return curOrder;
     }
 
-    public int submitOrder(Order order) {
+    public void submitOrder(Order order) {
         order.setOrderNumber(nextOrderNumber++);
         orders.add(order);
         curOrder = new Order();
-        return nextOrderNumber-1; // just returning the order's number because why not. If we don't ever need it we can change it to a void method.
     }
 
     public void removeOrder(int orderNumber) {

@@ -10,7 +10,9 @@ import javafx.scene.control.TextField;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * Controller class for managing all orders.
+ */
 public class AllOrderController {
 
     @FXML
