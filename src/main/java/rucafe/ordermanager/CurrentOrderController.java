@@ -5,6 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+/**
+ * Controller class for managing the current order view.
+ *
+ * @author Woogyeom Sim
+ */
 public class CurrentOrderController {
     @FXML
     private ListView<MenuItem> orderItemsListView;
@@ -18,6 +23,9 @@ public class CurrentOrderController {
     private final OrderList orderList = OrderList.getInstance();
     private Order curOrder;
 
+    /**
+     * Initializes the current order view with the current order details.
+     */
     @FXML
     private void initialize() {
         curOrder = orderList.getCurOrder();
@@ -26,6 +34,9 @@ public class CurrentOrderController {
         updatePrice();
     }
 
+    /**
+     * Handles the event when the place order button is clicked.
+     */
     @FXML
     private void onPlaceOrderButtonClick() {
         if (curOrder.getItems().isEmpty()) return;
@@ -35,6 +46,9 @@ public class CurrentOrderController {
         updatePrice();
     }
 
+    /**
+     * Handles the event when the remove item button is clicked.
+     */
     @FXML
     private void onRemoveItemButtonClick() {
         if (orderItemsListView.getSelectionModel().getSelectedItem() == null) return;
@@ -44,6 +58,9 @@ public class CurrentOrderController {
         updatePrice();
     }
 
+    /**
+     * Updates the order items list view with the current order items.
+     */
     private void updateItemListView() {
         orderItemsListView.getItems().clear();
         for (MenuItem item : curOrder.getItems()) {
@@ -51,6 +68,9 @@ public class CurrentOrderController {
         }
     }
 
+    /**
+     * Updates the price fields with the current order details.
+     */
     private void updatePrice() {
         double subTotal = curOrder.getSubTotal();
         double salesTax = curOrder.getSalesTax();

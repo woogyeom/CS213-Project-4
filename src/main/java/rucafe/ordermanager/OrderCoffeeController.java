@@ -8,6 +8,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Controller class for the coffee ordering interface.
+ *
+ * @author Woogyeom Sim
+ */
 public class OrderCoffeeController {
     public Button addToOrderButton;
     @FXML
@@ -30,6 +35,9 @@ public class OrderCoffeeController {
     private final OrderList orderList = OrderList.getInstance();
     private Coffee coffee;
 
+    /**
+     * Initializes the controller.
+     */
     @FXML
     private void initialize() {
         for (CoffeeSize coffeeSize : CoffeeSize.values()) {
@@ -46,31 +54,27 @@ public class OrderCoffeeController {
         updateSubTotal();
     }
 
-    @FXML
-    private void clear() {
-        coffeeSizeComboBox.setValue(CoffeeSize.SHORT);
-        coffeeQuantityComboBox.setValue(1);
-        sweetCreamCheckBox.setSelected(false);
-        frenchVanillaCheckBox.setSelected(false);
-        irishCreamCheckBox.setSelected(false);
-        mochaCheckBox.setSelected(false);
-        caramelCheckBox.setSelected(false);
-        coffee = new Coffee(CoffeeSize.SHORT, new boolean[]{false, false, false, false, false}, 1);
-        updateSubTotal();
-    }
-
+    /**
+     * Handles the selection of coffee size.
+     */
     @FXML
     private void handleCoffeeSize() {
         coffee.setCoffeeSize(coffeeSizeComboBox.getValue());
         updateSubTotal();
     }
 
+    /**
+     * Handles the selection of coffee quantity.
+     */
     @FXML
     private void handleCoffeeQuantity() {
         coffee.setQuantity(coffeeQuantityComboBox.getValue());
         updateSubTotal();
     }
 
+    /**
+     * Handles the selection of add-ins.
+     */
     @FXML
     private void handleAddIns() {
         boolean[] selected = new boolean[]{sweetCreamCheckBox.isSelected(), frenchVanillaCheckBox.isSelected(), irishCreamCheckBox.isSelected(), mochaCheckBox.isSelected(), caramelCheckBox.isSelected()};
@@ -78,6 +82,9 @@ public class OrderCoffeeController {
         updateSubTotal();
     }
 
+    /**
+     * Handles the addition of coffee to the order.
+     */
     @FXML
     private void onAddToOrderButtonClick() {
         Order curOrder = orderList.getCurOrder();
@@ -86,12 +93,14 @@ public class OrderCoffeeController {
         } else {
             curOrder.find(coffee).setQuantity(curOrder.find(coffee).getQuantity() + coffee.getQuantity());
         }
-//        clear();
 
         Stage stage = (Stage) addToOrderButton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Updates the subtotal display.
+     */
     @FXML
     private void updateSubTotal() {
         double subTotal = coffee.price();

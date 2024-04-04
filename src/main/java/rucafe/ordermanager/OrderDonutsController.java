@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Controller class for the donut ordering interface.
+ *
+ * @author Woogyeom Sim
+ */
 public class OrderDonutsController {
     public Button addToOrderButton;
     @FXML
@@ -28,6 +33,9 @@ public class OrderDonutsController {
     private final OrderList orderList = OrderList.getInstance();
     private List<Donut> selectedDonuts;
 
+    /**
+     * Initializes the controller.
+     */
     @FXML
     private void initialize() {
         selectedDonuts = new ArrayList<Donut>();
@@ -46,19 +54,33 @@ public class OrderDonutsController {
         updateSubTotal();
     }
 
+    /**
+     * Retrieves the selected donut type.
+     * @return The selected donut type.
+     */
     private DonutType getDonutType() {
         return Objects.requireNonNull(DonutType.fromDisplayName(donutTypeComboBox.getValue()));
     }
 
+    /**
+     * Retrieves the selected donut quantity.
+     * @return The selected donut quantity.
+     */
     private int getDonutQuantity() {
         return donutQuantityComboBox.getValue();
     }
 
+    /**
+     * Handles the selection of donut type.
+     */
     @FXML
     private void handleDonutType() {
         updateAvailableFlavors();
     }
 
+    /**
+     * Handles the addition of a donut to the order.
+     */
     @FXML
     private void onAddDonutButtonClick() {
         if (availableFlavorsListView.getSelectionModel().getSelectedItem() == null) return;
@@ -70,6 +92,9 @@ public class OrderDonutsController {
         updateSubTotal();
     }
 
+    /**
+     * Handles the removal of a donut from the order.
+     */
     @FXML
     private void onRemoveDonutButtonClick() {
         if (selectedFlavorsListView.getSelectionModel().getSelectedItem() == null) return;
@@ -87,6 +112,9 @@ public class OrderDonutsController {
         updateSubTotal();
     }
 
+    /**
+     * Handles the addition of selected donuts to the order.
+     */
     @FXML
     private void onAddToOrderButtonClick() {
         Order curOrder = orderList.getCurOrder();
@@ -107,6 +135,9 @@ public class OrderDonutsController {
         stage.close();
     }
 
+    /**
+     * Updates the available flavors list based on the selected donut type.
+     */
     private void updateAvailableFlavors() {
         String[] availableFlavors = getDonutType().getFlavors();
         availableFlavorsListView.getItems().clear();
@@ -125,6 +156,9 @@ public class OrderDonutsController {
         }
     }
 
+    /**
+     * Updates the selected flavors list.
+     */
     private void updateSelectedFlavors() {
         selectedFlavorsListView.getItems().clear();
         for (Donut donut : selectedDonuts) {
@@ -132,6 +166,9 @@ public class OrderDonutsController {
         }
     }
 
+    /**
+     * Updates the subtotal display.
+     */
     private void updateSubTotal() {
         double subTotal = 0;
         for (Donut donut : selectedDonuts) {
