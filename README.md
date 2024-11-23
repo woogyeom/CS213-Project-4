@@ -1,4 +1,5 @@
 # Cafe Order Management System with JavaFX (Project #4)
+![image](https://github.com/user-attachments/assets/4b0afaf1-99ff-4632-83d0-4ffbabd8cbe0)
 
 This project is a continuation of our development journey, focusing on building a comprehensive cafe ordering system using JavaFX. The project includes a graphical user interface (GUI) to manage various items in a cafe menu, create and modify customer orders, and provide a seamless experience for both the customer and the cafe staff.
 
